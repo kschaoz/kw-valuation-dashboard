@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Valuation Dashboard - Keller Williams</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1 class="brand-heading">Property Valuation Dashboard</h1>
+
+        <div class="upload-section card">
+            <label for="file-upload" class="upload-button kw-red-bg">
+                Drag & Drop or Select Excel File
+            </label>
+            <input type="file" id="file-upload" accept=".xls, .xlsx, .csv" style="display: none;">
+            <div id="upload-status" class="status-message"></div>
+
+            <div id="header-rename-input-container" class="header-rename" style="display: none;">
+                <label for="location-header-input">Detected Location Header:</label>
+                <input type="text" id="location-header-input" placeholder="e.g., Location">
+                <button id="update-header-button" class="kw-red-bg">Update Header</button>
+            </div>
+        </div>
+
+        <div class="price-readouts">
+            <div class="readout-box card">
+                <h3>Median Price</h3>
+                <div id="median-price-readout" class="price-value">RM 0.00</div>
+            </div>
+            <div class="readout-box card">
+                <h3>Weighted Average Price</h3>
+                <div id="weighted-avg-price-readout" class="price-value">RM 0.00</div>
+            </div>
+        </div>
+
+        <div class="weightage-section card">
+            <h3>Adjust Weightages</h3>
+            <div class="slider-group">
+                <label for="weight-2020-later">2020 or later:</label>
+                <input type="range" id="weight-2020-later" min="0" max="1" step="0.01" value="0.4">
+                <span id="value-2020-later" class="slider-value">0.40</span>
+            </div>
+            <div class="slider-group">
+                <label for="weight-2000-2019">2000 to 2019:</label>
+                <input type="range" id="weight-2000-2019" min="0" max="1" step="0.01" value="0.4">
+                <span id="value-2000-2019" class="slider-value">0.40</span>
+            </div>
+            <div class="slider-group">
+                <label for="weight-1999-earlier">1999 or earlier:</label>
+                <input type="range" id="weight-1999-earlier" min="0" max="1" step="0.01" value="0.2">
+                <span id="value-1999-earlier" class="slider-value">0.20</span>
+            </div>
+            <div id="weightage-error" class="error-message"></div>
+        </div>
+
+        <div class="graph-section card">
+            <h3>Price Changes Over Time</h3>
+            <div id="price-over-time-graph" class="graph-container"></div>
+        </div>
+    </div>
+
+</body>
+</html>
